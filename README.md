@@ -1,0 +1,158 @@
+# Bivariate-heritability
+Code for running simulations to determine extent to which negative confounding may lead to bivariate heritabilities greater than one.
+
+Last updated: 13/11/2017
+
+## R code
+	# Lattice plot for KS4 points & linear socioeconomic position
+	rp <- 0.446
+	ha <- 0.603
+	hb <- 0.529
+	rg <- 0.936
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot1 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Linear SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.603, ",h[b]^2,"=0.529, ",r[g],"=0.936, ",r[p],"=0.446")))
+
+
+	# Lattice plot for KS4 points & binary socioeconomic position
+	rp <- 0.314
+	ha <- 0.599
+	hb <- 0.327
+	rg <- 0.874
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot2 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Binary SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.599, ",h[b]^2,"=0.327, ",r[g],"=0.874, ",r[p],"=0.314")))
+
+
+	# Lattice plot for KS3 points & linear socioeconomic position
+	rp <- 0.398
+	ha <- 0.576
+	hb <- 0.543
+	rg <- 0.872
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot3 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Linear SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.576, ",h[b]^2,"=0.543, ",r[g],"=0.872, ",r[p],"=0.398")))
+
+
+	# Lattice plot for KS3 points & binary socioeconomic position
+	rp <- 0.281
+	ha <- 0.578
+	hb <- 0.337
+	rg <- 0.760
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot4 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Binary SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.578, ",h[b]^2,"=0.337, ",r[g],"=0.760, ",r[p],"=0.281")))
+
+
+	# Lattice plot for KS2 points & linear socioeconomic position
+	rp <- 0.364
+	ha <- 0.485
+	hb <- 0.551
+	rg <- 0.861
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot5 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Linear SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.485, ",h[b]^2,"=0.551, ",r[g],"=0.861, ",r[p],"=0.364")))
+
+
+	# Lattice plot for KS4 points & binary socioeconomic position
+	rp <- 0.251
+	ha <- 0.473
+	hb <- 0.338
+	rg <- 0.768
+	dat <- expand.grid(
+		ua = seq(0, 1, by=0.01),
+		ub = seq(0, 1, by=0.01)
+	)
+	dat$lhs <- rp - sqrt(ha) * sqrt(hb) * rg
+	dat$ru <- dat$lhs / dat$ua / dat$ub
+
+	# Any value of ru that is outside -1,1 is not possible so set to missing
+	dat$ru[dat$ru < -1] <- NA
+
+	library(lattice)
+	plot6 <- wireframe(ru ~ ua + ub,
+		dat=dat,
+		drape=TRUE,
+		scales = list(arrows=FALSE),
+		ylab=expression(u[b]^2), xlab=expression(u[a]^2), zlab=expression(r[u]),
+		main="Binary SEP",
+		sub=bquote(paste("Given ",h[a]^2,"=0.599, ",h[b]^2,"=0.327, ",r[g],"=0.874, ",r[p],"=0.314")))
+
+	grid.arrange(plot1,plot2, ncol=2)
+	grid.arrange(plot3,plot4, ncol=2)
+	grid.arrange(plot5,plot6, ncol=2)
