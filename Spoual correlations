@@ -1,0 +1,86 @@
+program define pheno_sims_camsis
+	drop _all
+	use "temp.dta", clear
+	gen a = rnormal(0,1)
+	keep c_fcamsis_m c645a c755 a
+	sort a
+	gen quasi_aln=_n
+	drop a
+	save "mums.dta", replace
+	use "temp.dta", clear
+	gen b = rnormal(0,1)
+	keep c_mcamsis_ptnr_pp c666a c765 b
+	sort b
+	gen quasi_aln=_n
+	drop b
+	save "dads.dta", replace
+	merge 1:1 quasi_aln using "mums.dta", nogen
+	corr c_fcamsis_m c_mcamsis_ptnr_pp
+end
+
+program define pheno_sims_class
+	drop _all
+	use "temp.dta", clear
+	gen a = rnormal(0,1)
+	keep c_fcamsis_m c645a c755 a
+	sort a
+	gen quasi_aln=_n
+	drop a
+	save "mums.dta", replace
+	use "temp.dta", clear
+	gen b = rnormal(0,1)
+	keep c_mcamsis_ptnr_pp c666a c765 b
+	sort b
+	gen quasi_aln=_n
+	drop b
+	save "dads.dta", replace
+	merge 1:1 quasi_aln using "mums.dta", nogen
+	corr c755 c765
+end
+
+program define pheno_sims_education
+	drop _all
+	use "temp.dta", clear
+	gen a = rnormal(0,1)
+	keep c_fcamsis_m c645a c755 a
+	sort a
+	gen quasi_aln=_n
+	drop a
+	save "mums.dta", replace
+	use "temp.dta", clear
+	gen b = rnormal(0,1)
+	keep c_mcamsis_ptnr_pp c666a c765 b
+	sort b
+	gen quasi_aln=_n
+	drop b
+	save "dads.dta", replace
+	merge 1:1 quasi_aln using "mums.dta", nogen
+	corr c645a c666a
+end
+
+simulate , reps(100): pheno_sims_camsis
+summ rho
+collapse (mean) rho
+mkmat rho, matrix(camsis)
+
+simulate , reps(100): pheno_sims_class
+summ rho
+collapse (mean) rho
+mkmat rho, matrix(class)
+
+simulate , reps(100): pheno_sims_education
+summ rho
+collapse (mean) rho
+mkmat rho, matrix(education)
+
+program drop pheno_sims_camsis
+program drop pheno_sims_class
+program drop pheno_sims_education
+
+matrix rowname camsis = "camsis"
+matrix rowname class = "class"
+matrix rowname education = "education"
+
+matrix list camsis
+matrix list class
+matrix list education
