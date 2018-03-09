@@ -1,22 +1,22 @@
-	program define pheno_sims_camsis
-		drop _all
-		use "temp.dta", clear
-		gen a = rnormal(0,1)
-		keep c_fcamsis_m c645a c755 a
-		sort a
-		gen quasi_aln=_n
-		drop a
-		save "mums.dta", replace
-		use "temp.dta", clear
-		gen b = rnormal(0,1)
-		keep c_mcamsis_ptnr_pp c666a c765 b
-		sort b
-		gen quasi_aln=_n
-		drop b
-		save "dads.dta", replace
-		merge 1:1 quasi_aln using "mums.dta", nogen
-		corr c_fcamsis_m c_mcamsis_ptnr_pp
-	end
+program define pheno_sims_camsis
+	drop _all
+	use "temp.dta", clear
+	gen a = rnormal(0,1)
+	keep c_fcamsis_m c645a c755 a
+	sort a
+	gen quasi_aln=_n
+	drop a
+	save "mums.dta", replace
+	use "temp.dta", clear
+	gen b = rnormal(0,1)
+	keep c_mcamsis_ptnr_pp c666a c765 b
+	sort b
+	gen quasi_aln=_n
+	drop b
+	save "dads.dta", replace
+	merge 1:1 quasi_aln using "mums.dta", nogen
+	corr c_fcamsis_m c_mcamsis_ptnr_pp
+end
 
 program define pheno_sims_class
 	drop _all
