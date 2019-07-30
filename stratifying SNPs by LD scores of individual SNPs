@@ -1,0 +1,23 @@
+# Reading in files: 
+lds_seg = read.table("O:/TIM/Projects/ALSPAC/Projects/Neil_genomics/LDMS/LDMS/output_all.score.ld",header=T,colClasses=c("character",rep("numeric",8)))
+
+# Stratifying SNPs by segment-based LD scores (assumes that functional SNPs are clustered in regions with higher or lower LD): 
+quartiles=summary(lds_seg$ldscore_SNP)
+lb1 = which(lds_seg$ldscore_SNP <= quartiles[2])
+lb2 = which(lds_seg$ldscore_SNP > quartiles[2] & lds_seg$ldscore_SNP <= quartiles[3])
+lb3 = which(lds_seg$ldscore_SNP > quartiles[3] & lds_seg$ldscore_SNP <= quartiles[5])
+lb4 = which(lds_seg$ldscore_SNP > quartiles[5])
+
+lb1_snp = lds_seg$SNP[lb1]
+lb2_snp = lds_seg$SNP[lb2]
+lb3_snp = lds_seg$SNP[lb3]
+lb4_snp = lds_seg$SNP[lb4]
+
+# Outputting files to make GRM's with: 
+setwd("O:/TIM/Projects/ALSPAC/Projects/Neil_genomics/LDMS/LDMS/r_created_files")
+write.table(lb1_snp, "snp_group1.txt", row.names=F, quote=F, col.names=F)
+write.table(lb2_snp, "snp_group2.txt", row.names=F, quote=F, col.names=F)
+write.table(lb3_snp, "snp_group3.txt", row.names=F, quote=F, col.names=F)
+write.table(lb4_snp, "snp_group4.txt", row.names=F, quote=F, col.names=F)
+
+# Now use GCTA to split into 4 MAF bins, giving a toal of 16 GRM's.
