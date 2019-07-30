@@ -1,3 +1,5 @@
+## R code
+
 # Lattice plot for KS4 points & linear socioeconomic position
 rp <- 0.446
 ha <- 0.603
